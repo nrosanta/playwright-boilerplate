@@ -1,0 +1,2 @@
+teamName: ${opt:teamName, "{{teamName}}"}
+kmsKey: arn:aws:kms:#{AWS::Region}:#{AWS::AccountId}:key/${env:DEFAULT_KMS_KEY_ID}

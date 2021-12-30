@@ -1,0 +1,54 @@
+service: tech-merlin-ui
+
+plugins:
+  - serverless-pseudo-parameters
+  - "@antoned0/serverless-s3-sync"
+  - serverless-python-requirements
+  - serverless-dotenv-plugin
+
+provider: 
+  name: aws
+  runtime: python3.7
+  stage: ${self:custom.stage}
+  stackTags:
+    environment: ${self:custom.stage}
+    team: Hub Data Engineering
+    project: Merlin
+    component: Application User Interface
+    owneremail: CCIATL-COEAnalyticsDataEngineering@cox.com
+  deploymentBucket:
+    name: cci-acoe-deployments-${self:custom.stage}
+    serverSideEncryption: aws:kms
+    SSEKMSKeyId: ${self:custom.vars.kmsKey}
+  role: ${self:custom.roles.lambdaServiceRole}
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+environment: $(file(./config/environment.yml))
+custom: 
+  stage: ${opt:stage, "dev"}
+  version: ${env:BUILD_VERSION, env:RV, self:custom.stage}
+  vars: ${file(./config/defaults.yml)}
+  s3Sync: ${file(./config/s3sync.yml)}
+  roles: ${file(./config/roles.yml)}
+  dotenv: 
+    basePath: ./config/environment/
+    logging: false
+    include:
+      - LOG_LEVEL
+      - RDS_MYSQL_HOSTNAME
+      - RDS_POSTGRESQL_HOSTNAME
+      - S3_DATA_BUCKET
+      - S3_SCRIPT_BUCKET
+      - S3_ARTIFACT_BUCKET
+  
+package:
+  individually: true
+  exclude:
+    - "*/**"
+
+functions:
+  lambdaMerlinTest1: ${file(./lambda/cci-acoe-lf-merlin-ui-test1/function.yml)}
+  lambdaMerlinTest2: ${file(./lambda/cci-acoe-lf-merlin-ui-test2/function.yml)}
+
+resources:
+  Resources:

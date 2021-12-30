@@ -1,0 +1,8 @@
+Type: String
+  Description: Deployment environment
+  AllowedValues:
+    - dev
+    - qa
+    - preprod
+    - prod
+  ConstraintDescription: must be one of 'dev, preprod, prod'

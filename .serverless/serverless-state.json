@@ -1,0 +1,248 @@
+{
+  "service": {
+    "service": "tech-merlin-ui",
+    "serviceObject": {
+      "name": "tech-merlin-ui"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([^{}]+?)}",
+      "name": "aws",
+      "runtime": "python3.7",
+      "stackTags": {
+        "environment": "dev",
+        "team": "Hub Data Engineering",
+        "project": "Merlin",
+        "component": "Application User Interface",
+        "owneremail": "CCIATL-COEAnalyticsDataEngineering@cox.com"
+      },
+      "deploymentBucket": "cci-acoe-deployments-dev",
+      "role": "arn:aws:iam::#{AWS::AccountId}:role/cci-svc-lambda-multiservice",
+      "region": "us-east-1",
+      "deploymentBucketObject": {
+        "name": "cci-acoe-deployments-dev",
+        "serverSideEncryption": "aws:kms",
+        "SSEKMSKeyId": "arn:aws:kms:#{AWS::Region}:#{AWS::AccountId}:key/b81561e4-ce42-46da-a282-768291292d38"
+      },
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "environment": {
+        "RDS_MYSQL_HOSTNAME": "cci-acoe-rds-aurora-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+        "RDS_POSTGRESQL_HOSTNAME": "cci-acoe-rds-aurora-postgres-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+        "S3_DATA_BUCKET": "cci-acoe-data-dev",
+        "S3_SCRIPT_BUCKET": "cci-acoe-scripts-dev",
+        "S3_ARTIFACT_BUCKET": "cci-acoe-artifacts-dev",
+        "LOG_LEVEL": "WARN"
+      },
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "LambdaMerlinTest1LogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/cci-acoe-lf-merlin-ui-test1-dev"
+            }
+          },
+          "LambdaMerlinTest2LogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/cci-acoe-lf-merlin-ui-test2-dev"
+            }
+          },
+          "LambdaMerlinTest1LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "cci-acoe-deployments-dev",
+                "S3Key": "serverless/tech-merlin-ui/dev/1603430368870-2020-10-23T05:19:28.870Z/lambdaMerlinTest1.zip"
+              },
+              "FunctionName": "cci-acoe-lf-merlin-ui-test1-dev",
+              "Handler": "lambda/cci-acoe-lf-merlin-ui-test1/src/handler.main",
+              "MemorySize": 128,
+              "Role": {
+                "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/cci-svc-lambda-multiservice"
+              },
+              "Runtime": "python3.7",
+              "Timeout": 120,
+              "Description": "Merlin Test Function 1",
+              "Environment": {
+                "Variables": {
+                  "RDS_MYSQL_HOSTNAME": "cci-acoe-rds-aurora-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+                  "RDS_POSTGRESQL_HOSTNAME": "cci-acoe-rds-aurora-postgres-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+                  "S3_DATA_BUCKET": "cci-acoe-data-dev",
+                  "S3_SCRIPT_BUCKET": "cci-acoe-scripts-dev",
+                  "S3_ARTIFACT_BUCKET": "cci-acoe-artifacts-dev",
+                  "LOG_LEVEL": "WARN"
+                }
+              }
+            },
+            "DependsOn": [
+              "LambdaMerlinTest1LogGroup"
+            ]
+          },
+          "LambdaMerlinTest1LambdaVersionOc42SLX1byZJWKZDSKWbIHHyfXCI8oYvzyuG160FUk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LambdaMerlinTest1LambdaFunction"
+              },
+              "CodeSha256": "Ib/yEA/pHbNha/EA+sdQCHXwWHNx/XlbQuNr6VDL5wk=",
+              "Description": "Merlin Test Function 1"
+            }
+          },
+          "LambdaMerlinTest2LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "cci-acoe-deployments-dev",
+                "S3Key": "serverless/tech-merlin-ui/dev/1603430368870-2020-10-23T05:19:28.870Z/lambdaMerlinTest2.zip"
+              },
+              "FunctionName": "cci-acoe-lf-merlin-ui-test2-dev",
+              "Handler": "lambda/cci-acoe-lf-merlin-ui-test2/src/handler.main",
+              "MemorySize": 128,
+              "Role": {
+                "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/cci-svc-lambda-multiservice"
+              },
+              "Runtime": "python3.7",
+              "Timeout": 120,
+              "Description": "Merlin Test Function 2",
+              "Environment": {
+                "Variables": {
+                  "RDS_MYSQL_HOSTNAME": "cci-acoe-rds-aurora-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+                  "RDS_POSTGRESQL_HOSTNAME": "cci-acoe-rds-aurora-postgres-dev.cluster-c30vra4exshg.us-east-1.rds.amazonaws.com",
+                  "S3_DATA_BUCKET": "cci-acoe-data-dev",
+                  "S3_SCRIPT_BUCKET": "cci-acoe-scripts-dev",
+                  "S3_ARTIFACT_BUCKET": "cci-acoe-artifacts-dev",
+                  "LOG_LEVEL": "WARN"
+                }
+              }
+            },
+            "DependsOn": [
+              "LambdaMerlinTest2LogGroup"
+            ]
+          },
+          "LambdaMerlinTest2LambdaVersion4W7VvYrtENDuLwrK7HE343HBhkudUwU5f1M7YQgBdpE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LambdaMerlinTest2LambdaFunction"
+              },
+              "CodeSha256": "Wri+Jp/cNyJKEmrFfs1tmG4hOq9IPumyWs+fIn0O1tQ=",
+              "Description": "Merlin Test Function 2"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "cci-acoe-deployments-dev"
+          },
+          "LambdaMerlinTest1LambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "LambdaMerlinTest1LambdaVersionOc42SLX1byZJWKZDSKWbIHHyfXCI8oYvzyuG160FUk"
+            }
+          },
+          "LambdaMerlinTest2LambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "LambdaMerlinTest2LambdaVersion4W7VvYrtENDuLwrK7HE343HBhkudUwU5f1M7YQgBdpE"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "custom": {
+      "stage": "dev",
+      "version": "dev",
+      "vars": {
+        "teamName": "${opt:teamName, \"{{teamName}}\"}",
+        "kmsKey": "arn:aws:kms:#{AWS::Region}:#{AWS::AccountId}:key/b81561e4-ce42-46da-a282-768291292d38"
+      },
+      "s3Sync": [
+        {
+          "bucketName": "cci-acoe-webapps-dev",
+          "bucketPrefix": "/",
+          "localDir": "./dist"
+        }
+      ],
+      "roles": {
+        "lambdaServiceRole": "arn:aws:iam::#{AWS::AccountId}:role/cci-svc-lambda-multiservice"
+      },
+      "dotenv": {
+        "basePath": "./config/environment/",
+        "logging": false,
+        "include": [
+          "LOG_LEVEL",
+          "RDS_MYSQL_HOSTNAME",
+          "RDS_POSTGRESQL_HOSTNAME",
+          "S3_DATA_BUCKET",
+          "S3_SCRIPT_BUCKET",
+          "S3_ARTIFACT_BUCKET"
+        ]
+      }
+    },
+    "plugins": [
+      "serverless-pseudo-parameters",
+      "@antoned0/serverless-s3-sync",
+      "serverless-python-requirements",
+      "serverless-dotenv-plugin"
+    ],
+    "pluginsData": {},
+    "functions": {
+      "lambdaMerlinTest1": {
+        "handler": "lambda/cci-acoe-lf-merlin-ui-test1/src/handler.main",
+        "name": "cci-acoe-lf-merlin-ui-test1-dev",
+        "description": "Merlin Test Function 1",
+        "timeout": 120,
+        "memorySize": 128,
+        "package": {
+          "include": [
+            "lambda/cci-acoe-lf-merlin-ui-test1/src/handler.py"
+          ],
+          "artifact": "C:\\CYGWIN64\\home\\EAnton\\tech-merlin-ui\\.serverless\\lambdaMerlinTest1.zip"
+        },
+        "runtime": "python3.7",
+        "events": [],
+        "module": ".",
+        "memory": 128,
+        "vpc": {},
+        "versionLogicalId": "LambdaMerlinTest1LambdaVersionOc42SLX1byZJWKZDSKWbIHHyfXCI8oYvzyuG160FUk"
+      },
+      "lambdaMerlinTest2": {
+        "handler": "lambda/cci-acoe-lf-merlin-ui-test2/src/handler.main",
+        "name": "cci-acoe-lf-merlin-ui-test2-dev",
+        "description": "Merlin Test Function 2",
+        "timeout": 120,
+        "memorySize": 128,
+        "package": {
+          "include": [
+            "lambda/cci-acoe-lf-merlin-ui-test2/src/handler.py"
+          ],
+          "artifact": "C:\\CYGWIN64\\home\\EAnton\\tech-merlin-ui\\.serverless\\lambdaMerlinTest2.zip"
+        },
+        "runtime": "python3.7",
+        "events": [],
+        "module": ".",
+        "memory": 128,
+        "vpc": {},
+        "versionLogicalId": "LambdaMerlinTest2LambdaVersion4W7VvYrtENDuLwrK7HE343HBhkudUwU5f1M7YQgBdpE"
+      }
+    },
+    "resources": {
+      "Resources": {},
+      "Outputs": {}
+    },
+    "serviceFilename": "serverless.yml",
+    "layers": {},
+    "isDashboardMonitoringPreconfigured": false
+  },
+  "package": {
+    "individually": true,
+    "artifactDirectoryName": "serverless/tech-merlin-ui/dev/1603430368870-2020-10-23T05:19:28.870Z",
+    "artifact": ""
+  }
+}

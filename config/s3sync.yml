@@ -1,0 +1,3 @@
+- bucketName: ${env:S3_WEBAPP_BUCKET}
+  bucketPrefix: ${self:service}
+  localDir: ./dist/${self:service}
