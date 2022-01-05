@@ -9,6 +9,8 @@ import { ApiService } from './_services/api.service';
 import { AwsConfig } from 'src/environments/aws.config';
 
 import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'angular2-chartjs';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule
+    ButtonModule,
+    ChartModule,
+    NgChartsModule
   ],
   providers: [AwsConfig, AuthService, ApiService],
   bootstrap: [AppComponent]

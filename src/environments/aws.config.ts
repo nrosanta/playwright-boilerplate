@@ -18,21 +18,8 @@ export class AwsConfig {
         }
     }
 
-    private _apiConfig = {
-        endpoints: [
-            {
-                name: 'HelloWorldAPI',
-                endpoint: 'https://pbq3gjcmw5.execute-api.us-east-1.amazonaws.com/dev'
-            }
-        ]
-    }
-
     public get authConfig() {
         return this._authConfig;
-    }
-
-    public get apiConfig() {
-        return this._apiConfig;
     }
        
 }

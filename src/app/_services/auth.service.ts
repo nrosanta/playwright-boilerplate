@@ -15,9 +15,7 @@ export class AuthService {
   constructor(private router : Router, private awsConfig : AwsConfig) {  
     this._authenticated = false; 
     Amplify.configure({
-      Auth: this.awsConfig.authConfig,
-      API: this.awsConfig.apiConfig
-    });
+      Auth: this.awsConfig.authConfig});
     Hub.listen('auth', (data) => {
       switch (data.payload.event) {
           case 'signIn':
