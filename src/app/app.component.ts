@@ -10,7 +10,7 @@ import { ChartModule } from 'angular2-chartjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tech-merlin-ui';
+  title = 'playwright-test-sample';
   type = 'line';
   data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
