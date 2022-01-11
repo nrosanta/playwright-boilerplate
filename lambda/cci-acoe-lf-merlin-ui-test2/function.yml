@@ -1,9 +1,0 @@
-handler: lambda/cci-acoe-lf-merlin-ui-test2/src/handler.main
-name: cci-acoe-lf-merlin-ui-test2-${self:provider.stage}
-description: Merlin Test Function 2
-timeout: 120
-memorySize: 128
-package:
-  include:
-    - lambda/cci-acoe-lf-merlin-ui-test2/src/handler.py
-runtime: python3.7
