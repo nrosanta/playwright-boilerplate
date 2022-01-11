@@ -20,7 +20,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `npm run test:e2e:local` to execute the end-to-end tests via Playwright.
+
+Run `npm run test:e2e:ci` to execute the end-to-end tests locally via Playwright. This also spins up a server before the test and stops it after the test.
 
 ## Further help
 
